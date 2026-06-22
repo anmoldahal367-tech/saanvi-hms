@@ -1,0 +1,14 @@
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.role-badge--admin { color: var(--role-admin); background: var(--role-admin-bg); }
+.role-badge--doctor { color: var(--role-doctor); background: var(--role-doctor-bg); }
+.role-badge--nurse { color: var(--role-nurse); background: var(--role-nurse-bg); }
+.role-badge--receptionist { color: var(--role-receptionist); background: var(--role-receptionist-bg); }
+.role-badge--patient { color: var(--role-patient); background: var(--role-patient-bg); }

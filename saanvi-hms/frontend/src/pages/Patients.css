@@ -1,0 +1,66 @@
+.patients-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.patients-page__title {
+  font-size: 22px;
+}
+
+.patients-page__search {
+  position: relative;
+  max-width: 280px;
+  flex: 1;
+}
+
+.patients-page__search input {
+  padding-left: 36px;
+}
+
+.patients-page__search-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+}
+
+.patients-page__row-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.patients-page__pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.patients-page__name-cell {
+  font-weight: 600;
+}
+
+.patients-page__banner {
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+}
+
+.patients-page__banner--success {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.patients-page__banner--error {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+}

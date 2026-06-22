@@ -1,0 +1,130 @@
+/*
+  SAANVI-HMS design tokens.
+  Direction: a calm clinical interface — the kind of quiet confidence you want
+  in a hospital system, not a flashy consumer app. Teal reads as "medical" without
+  being a cliché hospital-blue; warm graphite text instead of pure black softens
+  long shifts staring at the screen; amber is reserved only for things that need
+  a human's attention (pending actions, warnings).
+*/
+
+:root {
+  /* Color */
+  --color-bg: #F6F8F8;
+  --color-surface: #FFFFFF;
+  --color-border: #DCE4E3;
+  --color-text: #1F2A2C;
+  --color-text-muted: #5B6C6E;
+
+  --color-primary: #0F6E64;       /* deep teal — primary actions, active nav */
+  --color-primary-dark: #0B5650;
+  --color-primary-light: #E3F1EE;
+
+  --color-accent: #C97B3B;        /* warm amber-brown — attention / pending states */
+  --color-accent-light: #FBEFE2;
+
+  --color-danger: #B3402F;
+  --color-danger-light: #FBEAE6;
+  --color-success: #2C7A4B;
+  --color-success-light: #E7F5EC;
+
+  /* Role tag colors — each role gets a distinct, low-saturation chip color
+     so a glance at the dashboard header tells you who's logged in. */
+  --role-admin: #5B3A8E;
+  --role-admin-bg: #EFE8F7;
+  --role-doctor: #0F6E64;
+  --role-doctor-bg: #E3F1EE;
+  --role-nurse: #1D6FA5;
+  --role-nurse-bg: #E5EFF7;
+  --role-receptionist: #B0792E;
+  --role-receptionist-bg: #F8EEE0;
+  --role-patient: #5B6C6E;
+  --role-patient-bg: #ECEFEF;
+
+  /* Type */
+  --font-display: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  /* Layout */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --sidebar-width: 248px;
+  --topbar-height: 64px;
+
+  --shadow-sm: 0 1px 2px rgba(15, 30, 28, 0.06);
+  --shadow-md: 0 4px 16px rgba(15, 30, 28, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-text);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+::selection {
+  background: var(--color-primary-light);
+}
+
+/* Visible keyboard focus everywhere — required for clinical software
+   that will be used quickly, sometimes under stress. */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #E9EDEC 25%, #F2F5F4 37%, #E9EDEC 63%);
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

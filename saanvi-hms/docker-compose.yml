@@ -1,0 +1,20 @@
+version: '3.8'
+
+# Run `docker compose up -d` to get a local PostgreSQL instance matching
+# the default values in backend/.env.example. No native Postgres install needed.
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: saanvi-hms-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: your_postgres_password
+      POSTGRES_DB: saanvi_hms
+    ports:
+      - '5432:5432'
+    volumes:
+      - saanvi_pgdata:/var/lib/postgresql/data
+
+volumes:
+  saanvi_pgdata:

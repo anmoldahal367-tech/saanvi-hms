@@ -1,0 +1,56 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.field__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.field__required {
+  color: var(--color-danger);
+}
+
+.field__control {
+  padding: 9px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field__control:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.field__control--error {
+  border-color: var(--color-danger);
+}
+.field__control--error:focus {
+  box-shadow: 0 0 0 3px var(--color-danger-light);
+}
+
+.field__hint {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.field__error {
+  font-size: 12px;
+  color: var(--color-danger);
+  margin: 0;
+}
+
+textarea.field__control {
+  min-height: 88px;
+  resize: vertical;
+}
