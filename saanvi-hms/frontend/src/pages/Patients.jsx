@@ -2,6 +2,9 @@ import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { ROLES } from '../utils/roles';
 import { patientApi } from '../api/patientApi';
+import { appointmentApi } from '../api/appointmentApi';
+import { prescriptionApi } from '../api/prescriptionApi';
+import { downloadPatientRecordPDF } from '../utils/pdfGenerator';
 import Card from '../components/common/Card';
 import Table from '../components/common/Table';
 import Button from '../components/common/Button';
@@ -122,6 +125,20 @@ export default function Patients() {
     }
   };
 
+  const handleDownloadRecord = async (patient) => {
+    try {
+      // Fetch all appointments for this patient (up to 100 for the record).
+      const { data: apptData } = await appointmentApi.getAll({ limit: 100 });
+      // Filter to this patient's appointments (the API returns all for admin/staff).
+      const appointments = apptData.appointments.filter((a) => a.patient?.id === patient.id);
+      // Fetch all prescriptions for this patient.
+      const { data: rxData } = await prescriptionApi.getByPatient(patient.id);
+      downloadPatientRecordPDF(patient, appointments, rxData.prescriptions);
+    } catch (err) {
+      setBanner({ type: 'error', message: 'Could not generate PDF. Please try again.' });
+    }
+  };
+
   const columns = [
     {
       key: 'name',
@@ -138,6 +155,9 @@ export default function Patients() {
       header: '',
       render: (row) => (
         <div className="patients-page__row-actions">
+          <Button variant="ghost" onClick={() => handleDownloadRecord(row)} title="Download record PDF">
+            <Icon name="download" size={16} />
+          </Button>
           {canEdit && (
             <Button variant="ghost" onClick={() => openEdit(row)} title="Edit">
               <Icon name="pencil" size={16} />

@@ -9,6 +9,7 @@ import Button from '../components/common/Button';
 import Modal from '../components/common/Modal';
 import Icon from '../components/common/Icon';
 import StatusBadge from '../components/common/StatusBadge';
+import PrescriptionModal from '../components/common/PrescriptionModal';
 import AppointmentForm from './AppointmentForm';
 import './Appointments.css';
 
@@ -40,6 +41,8 @@ export default function Appointments() {
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  const [rxAppointment, setRxAppointment] = useState(null); // appointment for prescription modal
+
   const [banner, setBanner] = useState(null);
 
   // Who can do what — mirrors the backend's authorize(...) checks, purely
@@ -49,6 +52,7 @@ export default function Appointments() {
   const canUpdateOwnAsDoctor = hasRole(ROLES.DOCTOR);
   const canCancelOwnAsPatient = hasRole(ROLES.PATIENT);
   const canDelete = hasRole(ROLES.ADMIN);
+  const canWritePrescription = hasRole([ROLES.DOCTOR, ROLES.ADMIN]);
   // Admin/receptionist can pick any patient when booking; a patient books
   // only for themselves, so the form simply omits the patient dropdown.
   const pickPatientWhenBooking = hasRole([ROLES.ADMIN, ROLES.RECEPTIONIST]);
@@ -182,6 +186,10 @@ export default function Appointments() {
       header: '',
       render: (row) => (
         <div className="appointments-page__row-actions">
+          {/* Prescription button — visible to all roles, write access gated inside the modal */}
+          <Button variant="ghost" onClick={() => setRxAppointment(row)} title="Prescription">
+            <Icon name="pill" size={16} />
+          </Button>
           {canUpdateOwnAsDoctor && row.status === 'scheduled' && (
             <Button variant="ghost" onClick={() => handleMarkCompleted(row)} title="Mark as completed">
               Mark done
@@ -298,6 +306,22 @@ export default function Appointments() {
         <p style={{ margin: 0 }}>
           This permanently deletes the appointment record. This cannot be undone.
         </p>
+      </Modal>
+
+      <Modal
+        isOpen={!!rxAppointment}
+        onClose={() => setRxAppointment(null)}
+        title={canWritePrescription ? 'Prescription' : 'View Prescription'}
+        size="lg"
+      >
+        {rxAppointment && (
+          <PrescriptionModal
+            appointmentId={rxAppointment.id}
+            appointment={rxAppointment}
+            canWrite={canWritePrescription}
+            onClose={() => setRxAppointment(null)}
+          />
+        )}
       </Modal>
     </div>
   );

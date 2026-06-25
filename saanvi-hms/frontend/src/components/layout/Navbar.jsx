@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import RoleBadge from '../common/RoleBadge';
 import Icon from '../common/Icon';
+import NotificationBell from '../common/NotificationBell';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -24,6 +25,7 @@ export default function Navbar() {
     <header className="navbar">
       <div className="navbar__spacer" />
       <div className="navbar__user">
+        <NotificationBell />
         <div className="navbar__avatar">{initials}</div>
         <div className="navbar__user-info">
           <span className="navbar__user-name">{user?.name}</span>
